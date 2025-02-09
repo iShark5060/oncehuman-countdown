@@ -1,0 +1,113 @@
+body {
+	background-color: #090c10;
+	background-image: linear-gradient(rgba(9, 12, 16, 1), rgba(9, 12, 16, 0)), url("oncehuman.png");
+	background-repeat:no-repeat;
+	background-position: center center;
+	color: #b1b8c0;
+}
+
+.box {
+	display: flex;
+	margin: 0 auto;
+	max-width: 650px;
+	width: 100%;
+	text-align: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+    justify-content: center;
+	flex-wrap: wrap;
+    align-items: center;
+}
+
+.title {
+	display: block;
+	font: bold 36px Arial, sans-serif;
+	position: relative;
+	margin-bottom: 10px;
+	width: 650px;
+	height: 100px;
+	text-align: center;
+}
+
+.card {
+	position: relative;
+	padding: 50px;
+	margin-bottom: 25px;
+	display: block;
+	width: 210px;
+	height: 30px;
+	text-align: center;
+	background-color: #1c2431;
+	border-radius: 12px;
+	box-shadow: 0 15px 70px rgba(0, 0, 0, .1);
+}
+
+.card.mid {
+	background-color: #253041;
+}
+
+.card.light {
+	background-color: #2f3c51;
+}
+
+.card.left {
+	margin-right: auto;
+}
+
+.card.right {
+	margin-left: auto;
+}
+
+.header {
+	font: bold 20px Arial, sans-serif;
+	margin-top: -35px;
+}
+
+.footer {
+	font: normal 10px Arial, sans-serif;
+	margin-top: 10px;
+}
+
+#footer {
+	color: #5f6164;
+}
+
+.countdown {
+	font: bold 36px Arial, sans-serif;
+    margin-top: 10px;
+}
+
+.tooltip {
+	top: 20px;
+	left: 105%;
+	opacity: 0;
+	transition: opacity 1s;
+	visibility: hidden;
+	background-color: #06070A;
+	font: normal 16px Arial, sans-serif;
+	white-space:nowrap;
+	text-align: left;
+	min-width: 200px;
+	padding: 10px;
+	border-radius: 6px;
+	position: absolute;
+	z-index: 1;
+}
+
+.tooltip::after {
+	content: " ";
+	position: absolute;
+	top: 50%;
+	right: 100%;
+	margin-top: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: transparent #06070A transparent transparent;
+}
+
+.card:hover .tooltip {
+	visibility: visible;
+	opacity: 1;
+}
