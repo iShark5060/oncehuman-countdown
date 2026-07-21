@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# OnceHuman-Countdown quality gate: required files present.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+for f in index.php countdown.js style.css; do
+  if [[ ! -f "$f" ]]; then
+    echo "missing required file: $f" >&2
+    exit 1
+  fi
+done
+echo '==> validate passed'

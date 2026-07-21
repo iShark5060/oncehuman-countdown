@@ -23,6 +23,63 @@
 		$vrTime = 'next friday 23:00';
 		$drTime = 'tomorrow 04:00';
 		$ssTime = '07:00 first day of next month';
+		
+		// Variables
+		$serverName = 'EU-PVE01-X0142'; // Server Name - Printed like this
+		$serverStart = '03/28/2025 08:00'; // Server Start time in UTC+0 (Time shown ingame) (this was still winter time in EU)
+		$serverType = 'Manibus'; // Manibus, Way of Winter or Evolutions Call
+		$setTimezone = 'Europe/Berlin'; // Times will be converted to this Timezone
+
+		// Arrays
+		$stairwayArray = [1,8,15,22]; // Starting Days of the Stellar Stairway Phases
+		$serverArray = []; // Starting Days of the Server Phases (Post Update 1.4)
+		$serverArray['Manibus'] = [1,5,11,25,41];
+		$serverArray['Way of Winter'] = [1,6,11,21,36];
+		$serverArray['Evolutions Call'] = [1,7,12,19,29,39];
+
+		// Fixed Times
+		/* Times Known:
+		- Commissions: Every 7 days from Server start, 07:00
+		- Phase: Day X, 07:00
+		- Vendor: Every 7 days from Server start, 23:00
+		- Stellar: Day X, 07:00
+		- Lootbox: every 4h, starting at 16:00 (according to community)
+		- Daily: daily, should be at 16:00 according to community
+		- Containers: ? before 5am CEST
+		- Warband Donations: ?
+		- Purification: ?
+		- Hales' House: ?
+		- Ancient One's Trial: ?
+		- Day Reset: Every full Hour, 24h In Game = 1h Real
+		*/
+		$weeklyReset = '';
+		$vendorReset = '';
+		$dailyReset = '';
+		$phaseReset = '';
+		$stairwayReset = '';
+		$lootboxReset = '';
+
+		// Time Calculations
+		$currentTime = new DateTimeImmutable('now', new DateTimeZone($setTimezone));
+
+		$serverStartTime = new DateTimeImmutable($serverStart, new DateTimeZone("UTC"));
+		$serverStartTime = $serverStartTime->setTimezone(new DateTimeZone($setTimezone));
+
+		$serverStartDays = $currentTime->diff($serverStartTime)->format("%a"); // Calculate Days since Server Start
+
+		for($i = 1; $i <= count($serverArray[$serverType]); $i++) {
+			if($serverArray[$serverType][$i] <= $serverStartDays) {
+				$serverPhase = $i; // If we land exactly on that server start day, or the Phase started earlier, we are in that Phase (or a higher phase, will be overwritten then)
+			} else {
+				$serverPhase = $i - 1; // If the next Phase has a higher start day count, we're still not in that Phase
+				break;
+			}
+		};
+
+		$stairwayStartTime = new DateTimeImmutable('06:00 first day of this month', new DateTimeZone("UTC"));
+		$stairwayStartTime = $stairwayStartTime->setTimezone(new DateTimeZone($setTimezone));
+
+		$stairwayStartDays = $currentTime->diff($stairwayStartTime)->format("%a"); // Calculate Days since Start of Month
 
 		$stairwayResetTime = new DateTimeImmutable($ssTime, new DateTimeZone("UTC"));
 		$stairwayResetTime = $stairwayResetTime->setTimezone(new DateTimeZone('Europe/Berlin'));
@@ -39,7 +96,6 @@
 		$dailyResetTime = new DateTimeImmutable($drTime, new DateTimeZone("UTC"));
 		$dailyResetTime = $dailyResetTime->setTimezone(new DateTimeZone('Europe/Berlin'));
 
-		$currentTime = new DateTimeImmutable('now', new DateTimeZone("Europe/Berlin"));
 
 		// calculate time unitl x reset
 		$timeUntilStairwayReset = $stairwayResetTime->getTimestamp() - $currentTime->getTimestamp();
