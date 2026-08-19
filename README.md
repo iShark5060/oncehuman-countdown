@@ -5,7 +5,7 @@
 ![PHP](https://img.shields.io/badge/PHP-static-777BB4?logo=php&logoColor=white)
 [![Cursor](https://img.shields.io/badge/Cursor-IDE-141414?logo=cursor&logoColor=white)](https://cursor.com)
 
-Static PHP + JavaScript page that shows countdown timers for an Once Human game server (phase / daily / weekly resets, and related schedules).
+Static PHP + JavaScript page with countdown timers for an Once Human game server: phase, daily, and weekly resets.
 
 ## Requirements
 
@@ -26,9 +26,9 @@ Edit the PHP variables near the top of `index.php` for server name, timezone, an
 
 ## Scripts
 
-| Script               | Description                                      |
-| -------------------- | ------------------------------------------------ |
-| `scripts/validate`   | Checks required files exist (CI smoke gate).     |
+| Script             | Description                                  |
+| ------------------ | -------------------------------------------- |
+| `scripts/validate` | Checks required files exist (CI smoke gate). |
 
 ## Development
 
